@@ -68,10 +68,13 @@ install -m 755 runc.amd64 /usr/local/sbin/runc
 ## (3) Installing CNI plugins
 mkdir -p /opt/cni/bin
 tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.9.0.tgz
+echo " >>> containerd service and CNI installation finished. <<<"
 
 # 8. Update containerd/config.toml
 containerd config default > /etc/containerd/config.toml
 ## Update "sandbox = 'registry.k8s.io/pause:3.10.1'" 
 ## to     "sandbox = 'registry.aliyuncs.com/google_containers/pause:3.10.1'"
+sed -i '/pinned_images/{n;s/k8s\.io/aliyuncs.com\/google_containers/}' /etc/containerd/config.toml
+systemctl daemon-reload
 systemctl restart containerd
 
