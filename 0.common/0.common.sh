@@ -71,6 +71,7 @@ tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.9.0.tgz
 echo " >>> containerd service and CNI installation finished. <<<"
 
 # 8. Update containerd/config.toml
+mkdir /etc/containerd
 containerd config default > /etc/containerd/config.toml
 ## Update "sandbox = 'registry.k8s.io/pause:3.10.1'" 
 ## to     "sandbox = 'registry.aliyuncs.com/google_containers/pause:3.10.1'"

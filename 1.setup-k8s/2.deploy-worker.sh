@@ -61,7 +61,7 @@ while [[ $# > 0 ]]; do
   worker_ip=$1
   echo "worker_ip=${worker_ip}"
   shift
-  sudo scp -i ${pem} ./thistech/0.common/0.common.sh ${user}@${worker_ip}:~
+  sudo scp -i ${pem} /root/thistech/0.common/0.common.sh ${user}@${worker_ip}:~
   MYCOMMAND=$(setup_worker | base64 -w 0)
   ssh -t -i ${pem} ${user}@${worker_ip} "echo $MYCOMMAND | base64 -d | bash"
 done
